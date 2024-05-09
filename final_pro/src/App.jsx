@@ -13,6 +13,7 @@ const Login = () => {
         <div className="flex items-center justify-center h-screen bg-green-100">
             <div className="bg-gray-100 p-8 rounded-md shadow-lg">
                 <h3 className="text-2xl font-bold text-center text-green-600 mb-4">Login</h3>
+                <h3 className="text-2xl font-bold text-center text-green-600 mb-4">Login</h3>
                 <form>
                     <div className="mb-4">
                         <div className="flex items-center border-b border-green-600 py-2">
