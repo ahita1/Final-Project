@@ -1,37 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import  { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Login = () => {
+    const [type, setType] = useState('password');
+    const [eyeIcon, setEyeIcon] = useState('fa-eye');
 
-  return (
-    <>
-      <div>
-      <p className="">
-        This is An Inventory system Which is Our Final Project haha
-      </p>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        This is An Inventory system Which is Our Final Project haha
-      </p>
-    </>
-  )
-}
-export default App
+    const hideShowPassword = () => {
+        setType(type === 'password' ? 'text' : 'password');
+        setEyeIcon(eyeIcon === 'fa-eye' ? 'fa-eye-slash' : 'fa-eye');
+    };
+
+    return (
+        <div className="flex items-center justify-center h-screen bg-green-100">
+            <div className="bg-gray-100 p-8 rounded-md shadow-lg">
+                <h3 className="text-2xl font-bold text-center text-green-600 mb-4">Login</h3>
+                <form>
+                    <div className="mb-4">
+                        <div className="flex items-center border-b border-green-600 py-2">
+                            <span className="fa fa-user mr-2 text-green-600"></span>
+                            <input type="text" placeholder="Username" className="w-full focus:outline-none text-green-600" />
+                        </div>
+                    </div>
+                    <div className="mb-4">
+                        <div className="flex items-center border-b border-green-600 py-2">
+                            <span className="fa fa-lock mr-2 text-green-600"></span>
+                            <input type={type} placeholder="Password" className="w-full focus:outline-none text-green-600" />
+                            <span onClick={hideShowPassword} className={`fa ${eyeIcon} cursor-pointer text-green-600`}></span>
+                        </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                        <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-green-600">Forgot password?</a>
+                        <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
