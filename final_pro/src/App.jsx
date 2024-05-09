@@ -9,6 +9,9 @@ function App() {
   return (
     <>
       <div>
+      <p className="">
+        This is An Inventory system Which is Our Final Project haha
+      </p>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
