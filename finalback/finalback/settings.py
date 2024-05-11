@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -72,15 +74,10 @@ WSGI_APPLICATION = 'finalback.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'final',             # Database name
-        'USER': 'postgres',          # Database user
-        'PASSWORD': '7244',          # Database password
-        'HOST': 'localhost',         # Database host
-        'PORT': '5432',              # Database port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to your SQLite database file
     }
 }
 
@@ -125,3 +122,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# In settings.py
+
+# In settings.py
+
+AUTH_USER_MODEL = 'users.CustomUser'
