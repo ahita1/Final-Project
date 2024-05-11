@@ -26,7 +26,7 @@ class CustomUser(AbstractUser):
 
 
 class PersonalInfoTable(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=255)
     sex = models.IntegerField()
     date = models.DateField(default=timezone.now)  # Set default value to current date
