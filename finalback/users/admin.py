@@ -1,9 +1,20 @@
 from django.contrib import admin
-from .models import CustomUser
-from .forms import CustomUserCreationForm
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser,PersonalInfoTable
 
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'user_id', 'role', 'password']
-    form = CustomUserCreationForm  # Use custom form for adding users
 
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+    list_display = ['username', 'user_id', 'role', 'is_staff', 'is_superuser']
+    fieldsets = UserAdmin.fieldsets + (
+        ('Custom Fields', {'fields': ('user_id', 'role')}),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Custom Fields', {'fields': ('user_id', 'role')}),
+    )
+    search_fields = ('username', 'user_id')
+    ordering = ('username',)
+
+# Register your models here.
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(PersonalInfoTable)
