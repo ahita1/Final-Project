@@ -2,12 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import generics
-from .models import Category
-from .models import SubCategory
-from .serializers import CategorySerializer
-from .serializers import SubCategoryCreateSerializer,SubCategoryListSerializer
-from .models import Supplier
+from .serializers import CategorySerializer,SubCategoryCreateSerializer,SubCategoryListSerializer,ProsductListSerializer, ProsductCreateSerializer
+from .models import Supplier,Product,SubCategory,Category
 from .serializers import SupplierSerializer
+
 
 
 
@@ -58,14 +56,26 @@ class SupplierRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
 # Products haha
 
-from rest_framework import generics
-from .models import Product
-from .serializers import ProductSerializer
 
-class ProductListCreate(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
 
 class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProsductCreateSerializer    
+
+
+
+class ProductListCreate(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ProsductCreateSerializer
+        return ProsductListSerializer
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        if self.request.method == 'POST':
+            # Pass queryset of categories to create serializer
+            context['products'] = Product.objects.all()
+        return context
+    

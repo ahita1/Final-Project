@@ -5,7 +5,7 @@ from .models import CustomUser,PersonalInfoTable
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ['username', 'user_id', 'role', 'is_staff', 'is_superuser']
+    list_display = ['username', 'user_id', 'role', 'is_staff', 'is_superuser' , 'first_name' , 'last_name']
     fieldsets = UserAdmin.fieldsets + (
         ('Custom Fields', {'fields': ('user_id', 'role')}),
     )
