@@ -60,9 +60,14 @@ class SupplierRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
 class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProsductCreateSerializer    
 
-
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            # Use a serializer without detailed information for PUT requests
+            return ProsductCreateSerializer
+        else:
+            # Use a serializer with detailed information for other requests (GET, PATCH, DELETE)
+            return ProsductListSerializer
 
 class ProductListCreate(generics.ListCreateAPIView):
     queryset = Product.objects.all()
@@ -79,3 +84,87 @@ class ProductListCreate(generics.ListCreateAPIView):
             context['products'] = Product.objects.all()
         return context
     
+
+
+
+
+
+
+
+
+
+from rest_framework import generics
+from .models import Order
+from .serializers import OrderListSerializer, OrderCreateSerializer
+
+class OrderListCreate(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return OrderCreateSerializer
+        return OrderListSerializer
+
+class OrderRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            # Use a serializer without detailed information for PUT requests
+            return OrderCreateSerializer
+        else:
+            # Use a serializer with detailed information for other requests (GET, PATCH, DELETE)
+            return OrderListSerializer
+
+
+
+
+
+
+
+
+from rest_framework import generics
+from .models import Allocation
+from .serializers import AllocationListSerializer, AllocationCreateSerializer
+
+class AllocationListCreate(generics.ListCreateAPIView):
+    queryset = Allocation.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AllocationCreateSerializer
+        return AllocationListSerializer
+
+class AllocationRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Allocation.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            return AllocationCreateSerializer
+        return AllocationListSerializer
+
+
+
+
+
+
+
+from rest_framework import generics
+from .models import Distribution
+from .serializers import DistributionListSerializer, DistributionCreateSerializer
+
+class DistributionListCreate(generics.ListCreateAPIView):
+    queryset = Distribution.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return DistributionCreateSerializer
+        return DistributionListSerializer
+
+class DistributionRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Distribution.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            return DistributionCreateSerializer
+        return DistributionListSerializer
